@@ -71,61 +71,12 @@ services:
         environment:
             ALLOWED_HOSTS: localhost docker.mender.io 192.168.1.36 tobago.home.moseleynet.net
 
-    storage-proxy:
-        ports:
-            # outside port mapping for artifact storage (note that storage-proxy listens on port 9000)
-            - "9000:9000"
-        networks:
-            mender:
-                aliases:
-                    # change the alias to DNS name that storage will be
-                    # available on, for instance if devices will access storage
-                    # using https://s3.acme.org:9000, then set this to
-                    # s3.acme.org
-                    - tobago.home.moseleynet.net
-        environment:
-
-            # use nginx syntax for rate limiting, see
-            # https://nginx.org/en/docs/http/ngx_http_core_module.html#limit_rate
-            # Examples:
-            #   1m - 1MB/s
-            #   512k - 512kB/s
-            DOWNLOAD_SPEED: 1m
-            MAX_CONNECTIONS: 100
-        volumes:
-            - ./production/keys-generated/certs/storage-proxy/cert.crt:/var/www/storage-proxy/cert/cert.crt:ro
-            - ./production/keys-generated/certs/storage-proxy/private.key:/var/www/storage-proxy/cert/private.key:ro
-
     mender-deployments:
         command: server --automigrate
-        volumes:
-            - ./production/keys-generated/certs/storage-proxy/cert.crt:/etc/ssl/certs/storage-proxy.crt:ro
-        environment:
-            STORAGE_BACKEND_CERT: /etc/ssl/certs/storage-proxy.crt
-            # access key, the same value as MINIO_ACCESS_KEY
-            DEPLOYMENTS_AWS_AUTH_KEY: mender-deployments
-            # secret, the same valie as MINIO_SECRET_KEY
-            DEPLOYMENTS_AWS_AUTH_SECRET: ca2ni4shaekuY2wi
-
-            # deployments service uses signed URLs, hence it needs to access
-            # storage-proxy using exactly the same name as devices will; if
-            # devices will access storage using https://s3.acme.org:9000, then
-            # set this to https://s3.acme.org:9000
-            DEPLOYMENTS_AWS_URI: https://tobago.home.moseleynet.net:9000
         logging:
             options:
                 max-file: "10"
                 max-size: "50m"
-
-    minio:
-        environment:
-            # access key
-            MINIO_ACCESS_KEY: mender-deployments
-            # secret
-            MINIO_SECRET_KEY: ca2ni4shaekuY2wi
-        volumes:
-            # mounts a docker volume named `mender-artifacts-drew` as /export directory
-            - mender-artifacts-drew:/export:rw
 
     mender-conductor:
         volumes:
@@ -159,11 +110,6 @@ services:
         entrypoint: /redis/entrypoint.sh
 
 volumes:
-    # mender artifacts storage
-    mender-artifacts-drew:
-      external:
-          # use external volume created manually
-          name: mender-artifacts-drew
     # deployments service database
     mender-deployments-db:
       external:
