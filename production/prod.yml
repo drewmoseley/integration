@@ -8,8 +8,8 @@
 # - keys and certificates are generated using keygen utility from integration
 #   repository, keys and certificates are stored in ./keys-generated directory
 # - certificates and key are mounted into containers using volumes
-# - minio artifacts are stored in a named volume `mender-artifacts`; volume
-#   needs to be created manually using `docker volume create mender-artifacts`
+# - minio artifacts are stored in a named volume `mender-artifacts-drew`; volume
+#   needs to be created manually using `docker volume create mender-artifacts-drew`
 # - paths need to be adjusted, ie, replace /production/ with production directory
 #   (see list of compose bugs)
 
@@ -117,8 +117,8 @@ services:
             # secret
             MINIO_SECRET_KEY: ca2ni4shaekuY2wi
         volumes:
-            # mounts a docker volume named `mender-artifacts` as /export directory
-            - mender-artifacts:/export:rw
+            # mounts a docker volume named `mender-artifacts-drew` as /export directory
+            - mender-artifacts-drew:/export:rw
 
     mender-conductor:
         volumes:
@@ -141,10 +141,10 @@ services:
 
 volumes:
     # mender artifacts storage
-    mender-artifacts:
+    mender-artifacts-drew:
       external:
           # use external volume created manually
-          name: mender-artifacts
+          name: mender-artifacts-drew
     # mongo service database
     mender-db:
       external:
