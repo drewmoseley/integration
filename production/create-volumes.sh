@@ -1,4 +1,4 @@
-docker volume create --name=mender-artifacts
+docker volume create --name=mender-artifacts-drew
 docker volume create --name=mender-deployments-db
 docker volume create --name=mender-useradm-db
 docker volume create --name=mender-inventory-db
