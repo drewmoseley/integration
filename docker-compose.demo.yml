@@ -44,7 +44,7 @@ services:
             # Examples:
             #   1m - 1MB/s
             #   512k - 512kB/s
-            DOWNLOAD_SPEED: 1m
+            DOWNLOAD_SPEED: 100m
             MAX_CONNECTIONS: 100
         volumes:
             - ./certs/storage-proxy/cert.crt:/var/www/storage-proxy/cert/cert.crt
