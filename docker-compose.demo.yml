@@ -28,7 +28,7 @@ services:
             - ./certs/api-gateway/cert.crt:/var/www/mendersoftware/cert/cert.crt
             - ./certs/api-gateway/private.key:/var/www/mendersoftware/cert/private.key
         environment:
-            ALLOWED_HOSTS: localhost docker.mender.io
+            ALLOWED_HOSTS: localhost docker.mender.io 192.168.7.36 tobago.home.moseleynet.net
 
     storage-proxy:
         ports:
@@ -44,7 +44,7 @@ services:
             # Examples:
             #   1m - 1MB/s
             #   512k - 512kB/s
-            DOWNLOAD_SPEED: 1m
+            DOWNLOAD_SPEED: 100m
             MAX_CONNECTIONS: 100
         volumes:
             - ./certs/storage-proxy/cert.crt:/var/www/storage-proxy/cert/cert.crt
