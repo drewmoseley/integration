@@ -28,7 +28,7 @@ services:
             - ./certs/api-gateway/cert.crt:/var/www/mendersoftware/cert/cert.crt
             - ./certs/api-gateway/private.key:/var/www/mendersoftware/cert/private.key
         environment:
-            ALLOWED_HOSTS: localhost docker.mender.io
+            ALLOWED_HOSTS: localhost docker.mender.io 192.168.7.36 tobago.home.moseleynet.net
 
     storage-proxy:
         ports:
