@@ -15,9 +15,9 @@ services:
         # Keys have to grant access to default bucket: mender-artifact-storage
         environment:
             DEPLOYMENTS_AWS_TAG_ARTIFACT: "true"
-            DEPLOYMENTS_AWS_AUTH_KEY: ${AWS_ACCESS_KEY_ID}
-            DEPLOYMENTS_AWS_AUTH_SECRET: ${AWS_SECRET_ACCESS_KEY}
-            DEPLOYMENTS_AWS_REGION: us-west-1
-            DEPLOYMENTS_AWS_URI: https://s3-us-west-1.amazonaws.com
-            DEPLOYMENTS_AWS_BUCKET: mender-artifacts-int-testing-us
+            DEPLOYMENTS_AWS_AUTH_KEY: AKIASRZ4HKERKK4YPW54
+            DEPLOYMENTS_AWS_AUTH_SECRET: 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
+            DEPLOYMENTS_AWS_REGION: us-east-1
+            DEPLOYMENTS_AWS_URI: https://s3.amazonaws.com
+            DEPLOYMENTS_AWS_BUCKET: mender-artifacts-drew
 

@@ -6,6 +6,6 @@ set -e
 exec docker-compose \
      -p menderproduction \
      -f ../docker-compose.yml \
-     -f ../docker-compose.storage.minio.yml \
+     -f ../docker-compose.storage.s3.yml \
      -f ./prod.yml \
      "$@"
