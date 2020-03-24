@@ -42,6 +42,8 @@ services:
             options:
                 max-file: "10"
                 max-size: "50m"
+        environment:
+            DEVICEAUTH_MAX_DEVICES_LIMIT_DEFAULT: 25
 
     mender-inventory:
         command: server --automigrate
