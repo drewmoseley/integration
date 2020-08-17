@@ -45,7 +45,7 @@ def fill_production_template():
         shell=True,
     )
     subprocess.check_output(
-        "sed -i '0,/set-my-alias-here.com/s/set-my-alias-here.com/localhost/' ../production-testing-env.yml",
+        "sed -i '0,/demo_storage_proxy.com/s/demo_storage_proxy.com/localhost/' ../production-testing-env.yml",
         shell=True,
     )
     subprocess.check_output(
