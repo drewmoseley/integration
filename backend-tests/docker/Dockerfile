@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.9.1
 
 RUN apt-get -y -qq update && apt-get -qq -y install \
     docker.io \
